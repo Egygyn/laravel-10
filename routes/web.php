@@ -25,6 +25,12 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/forgot-password', [LoginController::class, 'forgot_password'])->name('forgot-password');
+Route::post('/forgot-password-act', [LoginController::class, 'forgot_password_act'])->name('forgot-password-act');
+
+Route::get('/validasi-forgot-password/{token}', [LoginController::class, 'validasi_forgot_password'])->name('validasi-forgot-password');
+Route::post('/validasi-forgot-password-act', [LoginController::class, 'validasi_forgot_password_act'])->name('validasi-forgot-password-act');
+
 Route::post('/register-proses', [LoginController::class, 'register_proses'])->name('register-proses');
 
 Route::get('/register', [LoginController::class, 'register'])->name('register');
