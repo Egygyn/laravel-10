@@ -53,6 +53,7 @@
                       <th>Nik</th>
                       <th>Nama</th>
                       <th>Assets</th>
+                      <th>Jumlah Assets</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -65,36 +66,14 @@
                         <td>
                             <ul>
                                 @foreach ($d->assets as $asset)
-                                    <li>{{ asset{{ $asset->name }} }}</li>
+                                    <li>{{ $asset->nama_asset }}</li>
                                 @endforeach
                             </ul>
                         </td>
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">Konfirmasi Hapus Data</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <p>Apakah Kamu Yakin ? Untuk Menghapus Data <b>{{ $d->name }}</b></p>
-                                  </div>
-                                  <div class="modal-footer justify-content-between">
-                                    <form action="{{ route('admin.user.delete',['id'=>$d->id]) }}" method="POST">
-                                      @csrf
-                                      @method('DELETE')
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Cencel</button>
-                                      <button type="submit" class="btn btn-primary">Ya Hapus Data</button>
-                                    </form>
+                      <td>{{ count($d -> assets) }}</td>
 
-                                  </div>
-                                </div>
-                                <!-- /.modal-content -->
-                              </div>
-                              <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
+          </div>
+                        <!-- /.modal -->
                     @endforeach
 
                   </tbody>

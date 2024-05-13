@@ -56,6 +56,6 @@ class User extends Authenticatable
     }
     public function assets()
     {
-        return $this->belongsToMany(Asset::class, 'user_assets');
+        return $this->belongsToMany(Asset::class, 'users_assets');
     }
 }
