@@ -113,7 +113,7 @@ class HomeController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'photo' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'photo' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             'email' => 'required|email',
             'nama'  => 'required',
             'password' => 'nullable',
@@ -143,10 +143,8 @@ class HomeController extends Controller
             if ($find->image) {
                 Storage::disk('public')->delete('photo-user/' . $find->image);
             }
+            Storage::disk('public')->put($patch, file_get_contents($photo));
         }
-
-
-        Storage::disk('public')->put($patch, file_get_contents($photo));
 
         $find->update($data);
 

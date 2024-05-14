@@ -43,14 +43,14 @@
                   </div>
                   <div class="form-group">
                     <label for="InputEmail">Email address</label>
-                    <input type="email" name="email" class="form-control" id="InputEmail" placeholder="Enter email">
+                    <input type="email" name="email" class="form-control" id="InputEmail" placeholder="Enter email" value="{{ old('email') }}">
                       @error('email')
                           <small>{{ $message }}</small>
                       @enderror
                   </div>
                   <div class="form-group">
                     <label for="InputNama">Nama</label>
-                    <input type="text" class="form-control" id="InputNama" name="nama" placeholder="Enter Nama">
+                    <input type="text" class="form-control" id="InputNama" name="nama" placeholder="Enter Nama" value="{{ old('nama') }}">
                       @error('nama')
                           <small>{{ $message }}</small>
                       @enderror
