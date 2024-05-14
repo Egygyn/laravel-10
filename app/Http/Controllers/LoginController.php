@@ -74,14 +74,12 @@ class LoginController extends Controller
         }
 
         $user = User::where('email', $token->email)->first();
-
         if (!$user) {
             return redirect()->route('login')->with('failled', 'Email Tidak Terdaftar');
         }
         $user->update([
             'password' => Hash::make($request->password)
         ]);
-
 
         $token->delete();
 
