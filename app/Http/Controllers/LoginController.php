@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Livewire\Attributes\Validate;
 
 class LoginController extends Controller
 {
@@ -52,13 +51,54 @@ class LoginController extends Controller
 
         Mail::to($request->email)->send(new ResetPasswordMail($token));
 
-
-        $data = [
-            'email' => $request->email
-        ];
         return redirect()->route('forgot-password')->with('success', 'link recovery cek di email');
     }
 
+
+    public function validasi_forgot_password_act(Request $request)
+    {
+        $cutomMessage = [
+            'password.required' => 'Password Tidak Boleh Kosong',
+            'password.min'      => 'Password Minimal 8 Karakter',
+        ];
+
+        $request->validate([
+            'password' => 'required|min:8'
+        ], $cutomMessage);
+
+        // dd($request->all());
+        $token = PasswordResetToken::where('token', $request->token)->first();
+
+        if (!$token) {
+            return redirect()->route('login')->with('failled', 'Token Tidak Valid');
+        }
+
+        $user = User::where('email', $token->email)->first();
+
+        if (!$user) {
+            return redirect()->route('login')->with('failled', 'Email Tidak Terdaftar');
+        }
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+
+        $token->delete();
+
+        return redirect()->route('login')->with('succes', 'pasword telah di resset');
+    }
+
+    public function validasi_forgot_password(Request $request, $token)
+    {
+        $getToken = PasswordResetToken::where('token', $token)->first();
+
+        if (!$getToken) {
+
+            return redirect()->route('login')->with('failled', 'Token Tidak Valid');
+        }
+
+        return  view('auth.validasi-token', compact('token'));
+    }
 
     public function login_proses(Request $request)
     {
@@ -79,6 +119,7 @@ class LoginController extends Controller
             return redirect()->route('login')->with('failled', 'email atau pasword salah');
         }
     }
+
     public function logout()
     {
         Auth::logout();

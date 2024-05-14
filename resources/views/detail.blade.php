@@ -29,15 +29,15 @@
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
-                @if ($data->image)
-                  <img src="{{ asset('storage/photo-user/'.$data->image) }}" width="80px" alt="">
-                @endif
+                  @if ($data->image)
+                      <img src="{{ asset('storage/photo-user/' . $data->image) }}" width="100" height="100px" alt="">
+                 @endif
                   <div class="form-group">
                     <label for="InputEmail">Email</label>
                     <p>{{ $data->email }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="InputNama">Nama</label>
+                    <label for="InputNama">{{ __('users.nama') }}</label>
                     <p>{{ $data->name }}</p>
                   </div>
                 </div>
@@ -45,10 +45,10 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>No</th>
-                      <th>Type Rumah</th>
-                      <th>Harga Rumah</th>
-                      <th>Lokasi Rumah</th>
+                        <th>No</th>
+                        <th>{{ __('users.type_rumah') }}</th>
+                        <th>{{ __('users.harga_rumah') }}</th>
+                        <th>{{ __('users.Lokasi Rumah') }}</th>
                     </tr>
                   </thead>
                   <tbody>

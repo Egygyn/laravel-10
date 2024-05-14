@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeController extends Controller
 {
@@ -55,6 +56,11 @@ class HomeController extends Controller
         //$data = $data->withTrashed();
 
         $data = $data->get();
+
+        if ($request->get('export') == 'pdf') {
+            $pdf = Pdf::loadView('pdf.assets', ['data' => $data]);
+            return $pdf->stream('Data_Asset.pdf');
+        }
 
         return view('assets', compact('data', 'request'));
     }

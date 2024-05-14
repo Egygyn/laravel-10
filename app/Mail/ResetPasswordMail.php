@@ -26,7 +26,7 @@ class ResetPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reset Password Mail',
+            subject: 'Reset Password E-mail',
         );
     }
 
@@ -35,7 +35,6 @@ class ResetPasswordMail extends Mailable
      */
     public function content(): Content
     {
-        dd($this->token);
         return new Content(
             view: 'auth.mail-reset-password',
             with: [

@@ -24,7 +24,8 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <a href="{{route('admin.user.create')}}" class="btn btn-primary">Tambah Data</a>
+            <a href="{{route('admin.user.create')}}" class="btn btn-primary mb-3">Tambah Data</a>
+            <a href="{{route('admin.assets')}}?export=pdf" class="btn btn-danger ml-3 mb-3">Export Pdf</a>
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Responsive Hover Table</h3>
